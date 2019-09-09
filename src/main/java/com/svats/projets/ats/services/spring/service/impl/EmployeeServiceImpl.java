@@ -26,11 +26,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void save(Employee employee) {
-
+        repository.save(employee);
     }
 
     @Override
     public void delete(final Long id) {
-
+        throw new UnsupportedOperationException("Delete operation is disabled for now...");
+        //repository.deleteById(id);
     }
 }

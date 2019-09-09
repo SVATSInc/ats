@@ -33,12 +33,14 @@ public class EmployeeController {
 
     @GetMapping("list")
     public String showUpdateForm(Model model) {
+        logger.debug("showUpdateForm");
         model.addAttribute("employees", service.findAll());
         return "index";
     }
 
     @PostMapping("add")
     public String addEmployee(@Valid Employee employee, BindingResult result, Model model) {
+        logger.debug("addEmployee");
         if (result.hasErrors()) {
             return "add-employee";
         }
@@ -49,6 +51,7 @@ public class EmployeeController {
 
     @GetMapping("edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
+        logger.debug("showUpdateForm");
         Employee employee = service.findById(id);
         model.addAttribute("employee", employee);
         return "update-employee";
@@ -57,6 +60,7 @@ public class EmployeeController {
     @PostMapping("update/{id}")
     public String updateEmployee(@PathVariable("id") long id, @Valid Employee employee,
                                  BindingResult result, Model model) {
+        logger.debug("updateEmployee");
         if (result.hasErrors()) {
             employee.setId(id);
             return "update-employee";
@@ -69,6 +73,7 @@ public class EmployeeController {
 
     @GetMapping("delete/{id}")
     public String deleteEmployee(@PathVariable("id") long id, Model model) {
+        logger.debug("deleteEmployee");
         service.delete(id);
         model.addAttribute("employees", service.findAll());
         return "index";
